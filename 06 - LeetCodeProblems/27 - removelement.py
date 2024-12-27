@@ -3,7 +3,7 @@
 # Top interview 150 https://leetcode.com/problems/remove-element/?envType=study-plan-v2&envId=top-interview-150
 # Github: https://github.com/nevoada10
 
-from typing import List
+from typing import Counter, List
 
 
 class Solution(object):
@@ -16,35 +16,61 @@ class Solution(object):
         Removes all occurrences of 'val' from 'nums' and returns the number of elements left.
     """
 
-    def removeElement(self, nums, val):
-        print(f"Initial nums: {nums}, val to remove: {val}")
+    def removeElement(self, nums: List[int], val: int) -> int:
 
-        counter = 0
-        for i in range(len(nums)):
-            print(f"Checking element: {nums[i]} at index: {i}")
-            
+        counter: int = 0
+        list_length: int = len(nums)
+        for i in range(list_length):
             if nums[i] == val:
-                print(f"Element {nums[i]} is equal to val, removing...")
                 nums[i] = None  # Mark for removal
                 counter += 1
         
-        # Remove marked elements
-        nums[:] = [num for num in nums if num is not None]
-        print(f"Modified nums: {nums}")
-
-        k = len(nums)
-        print(f"Number of elements left: {k}")
+        # Sort the list putting None values at the end
+        nums.sort(key=lambda x: x is None)
+        k = list_length - counter
         return k
 
-
-if __name__ == "__main__":
+def test_cases():
     solution = Solution()
-    print(solution.removeElement([3,2,2,3], 3))
+    
+    test_cases = [
+        # Input list, value to remove, expected length, expected modified list
+        ([3, 2, 2, 3], 3, 2, [2, 2]),           # Basic case with multiple occurrences
+        ([1, 2, 3, 4, 5], 6, 5, [1, 2, 3, 4, 5]),  # No occurrences of val
+        ([2, 2, 2, 2], 2, 0, []),               # All elements are val
+        ([], 1, 0, []),                         # Empty list
+        ([0, 1, 2, 2, 3, 0, 4, 2], 2, 5, [0, 1, 3, 0, 4])  # Mixed elements
+    ]
+    
+    # Run tests
+    for nums, val, expected_length, expected_list in test_cases:
+        # Create a copy of the original list to preserve input
+        nums_copy = nums.copy()
+        
+        # Call removeElement
+        result = solution.removeElement(nums_copy, val)
+        
+        # Check length
+        length_passed = result == expected_length
+        
+        # Check modified list (first 'result' elements)
+        list_passed = nums_copy[:result] == expected_list
+        
+        print(f"Input: nums = {nums}, val = {val}")
+        print(f"Expected Length: {expected_length}, Actual Length: {result}")
+        print(f"Expected List: {expected_list}, Actual List: {nums_copy[:result]}")
+        print(f"Length Passed: {length_passed}, List Passed: {list_passed}")
+        print("---")
 
+# Run the tests
+if __name__ == "__main__":
+    test_cases()
 
+# Time complexity: O(n)
+# - The algorithm iterates through the array nums once, which takes O(n) time.
 
-# Time complexity: 
-# Space complexity:
+# Space complexity: O(1)
+# - The algorithm uses a constant amount of space, regardless of the size of the input.
 
 """
 Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The order of the elements may be changed. Then return the number of elements in nums which are not equal to val.
