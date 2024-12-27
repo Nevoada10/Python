@@ -3,10 +3,17 @@
 # Author: Uriel Neves Silva
 # Github: https://github.com/nevoada10
 
+# The List type hint is used to indicate that the function takes a list as an argument.
+# This import is necessary because the List type hint is part of the typing module.
+
+from typing import List # Imports static typing
+
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """
+        Merges two sorted integer arrays in-place.
         Do not return anything, modify nums1 in-place instead.
+        Uses static typing for code readability.
         """
 
         # This code works backwards, because starting from the front, the elements
