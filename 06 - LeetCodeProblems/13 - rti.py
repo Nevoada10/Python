@@ -1,6 +1,6 @@
-# 88 - Merge Sorted Array (Solution)
+# 88 - Roman to Integer (Solution)
 # Author: Uriel Neves Silva
-# Top interview 150 https://leetcode.com/problems/merge-sorted-array/?envType=study-plan-v2&envId=top-interview-150
+# Top interview 150 https://leetcode.com/problems/roman-to-integer/?envType=study-plan-v2&envId=top-interview-150
 # Github: https://github.com/nevoada10
 
 from typing import List
